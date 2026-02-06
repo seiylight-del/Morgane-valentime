@@ -39,11 +39,13 @@
         }
 
         .buttons {
+            /* Arrange buttons vertically so that the larger green button does not
+               overlap the red one when it scales up. Using column layout
+               with a gap keeps both buttons visible regardless of size. */
             display: flex;
-            gap: 15px;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .btn {
@@ -53,6 +55,9 @@
             border-radius: 6px;
             cursor: pointer;
             transition: transform 0.2s ease;
+            /* Prevent text clipping on long labels */
+            white-space: normal;
+            max-width: 90vw;
         }
 
         .btn:focus {
@@ -134,7 +139,14 @@
             img.src = 'bear.png';
             img.alt = 'Ours mignon avec bouquet de fleurs et cœurs';
             const message = document.createElement('h1');
-            message.innerHTML = '🥳 Je savais que tu dirais oui ! À bientôt ❤️';
+            /*
+             * Remplacer le message final "À bientôt" par un texte rassurant
+             * pour Morgane. On conserve la phrase "Je savais que tu dirais oui" et
+             * on ajoute une note humoristique indiquant que c'est juste pour rigoler.
+             */
+            message.innerHTML =
+                '🥳 Je savais que tu dirais oui !<br>' +
+                'T’inquiète 😅, c’est juste pour rigoler&nbsp;: je ne t’invite pas vraiment pour la Saint‑Valentin, tu peux déstresser 😅😂';
             container.appendChild(img);
             container.appendChild(message);
             document.body.appendChild(container);
