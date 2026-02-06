@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pour Morgane – Valentine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Basic reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        img {
+            width: 40vw;
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
+        .yes {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .no {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        /* When the page shows the final message we centre everything */
+        .final-message img {
+            width: 50vw;
+            max-width: 300px;
+            margin-bottom: 30px;
+        }
+
+        .final-message h1 {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <img src="bear.png" alt="Ours mignon avec bouquet de fleurs et cœurs">
+    <h1 id="question">Morgane, veux‑tu être ma valentine&nbsp;? 👉👈</h1>
+    <div class="buttons">
+        <button id="yesBtn" class="btn yes">Oui</button>
+        <button id="noBtn" class="btn no">Non 😢</button>
+    </div>
+
+    <script>
+        // Liste des messages qui apparaissent sur le bouton "Non" à chaque clic.
+        const noMessages = [
+            "Non 😢",
+            "T’es sûre ?",
+            "Même si je demandais vraiment gentiment ?",
+            "S’il te plaît !!!",
+            "Avec un gâteau ?",
+            "Et un cocktail au piment ?",
+            "Mais 🥲",
+            "Je vais mourir 😢",
+            "Voilà je suis mort 😵",
+            "Tu parles à mon fantôme maintenant 👻",
+            "S’il te plait Morgane",
+            "S’IL TE PLAÎT !!!",
+            "😭"
+        ];
+
+        let clickCount = 0;
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const question = document.getElementById('question');
+
+        noBtn.addEventListener('click', () => {
+            clickCount++;
+            // Change the text on the red button based on click count
+            if (clickCount < noMessages.length) {
+                noBtn.textContent = noMessages[clickCount];
+            } else {
+                noBtn.textContent = noMessages[noMessages.length - 1];
+            }
+            // Increase size of the green button each time
+            const scale = 1 + clickCount * 0.2;
+            yesBtn.style.transform = `scale(${scale})`;
+        });
+
+        yesBtn.addEventListener('click', () => {
+            // When the user clicks Yes, show a thank you message
+            document.body.innerHTML = '';
+            const container = document.createElement('div');
+            container.className = 'final-message';
+            const img = document.createElement('img');
+            img.src = 'bear.png';
+            img.alt = 'Ours mignon avec bouquet de fleurs et cœurs';
+            const message = document.createElement('h1');
+            message.innerHTML = '🥳 Je savais que tu dirais oui ! À bientôt ❤️';
+            container.appendChild(img);
+            container.appendChild(message);
+            document.body.appendChild(container);
+        });
+    </script>
+</body>
+</html>
